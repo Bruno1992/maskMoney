@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mask</title>
+	
+</head>
+<body>
+	<input  type='text' onkeyup="Mask_Value(this)" value="" id='valor'>
+
+	<div id='R'>
+		
+
+	</div>
+
+   
+</body>
+
+
+
+<script type="text/javascript">
+	
+
+function Mask_Value(value){
+	var valor = value.value;
+	var tirar_zero = 1;
+    var valorB = '';
+    var valorC;
+    valor = valor.replace(",", "");
+    valor = valor.replace(".", "");
+    for (var i = 0; i < valor.length; i++) {
+		if( (valor[i] > 0)&&(tirar_zero == 1) ){
+			tirar_zero = 0;
+		}
+        if((tirar_zero == 0)&&(valor[i] != ".")&&(valor[i] != ",")&&((valor[i] >= 0)  && (valor[i] <= 9))){
+			valorB = valorB +''+ valor[i];
+		}	
+	}
+    valor = valorB.trim();
+    var sizeValue = valor.length;
+    if(sizeValue == 1){
+ 		valor = '0.0'+valor;
+    }else if(sizeValue == 2){
+    	valor = '0.'+valor;
+    }else if(sizeValue >= 3){
+    	var pos = sizeValue - 2;
+    	for (var i = 0; i < valor.length; i++) {
+			if(pos == i){	
+				valorC = valorC + '.' + valor[i];
+			}else{
+				if(valorC){
+					valorC = valorC + '' + valor[i];
+				}else{
+					valorC = valor[i];
+				}	
+			}
+		}
+        valor = valorC;
+    }
+    document.getElementById(value.id).value = valor;
+}
+
+
+
+</script>
+
+</html>
+
